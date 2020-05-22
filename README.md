@@ -32,7 +32,7 @@ SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool
     Default: 0.
     
 - threads\
-    It's a dummy parameter for backward compatibility.\
+    It's a dummy parameter for backward compatibility.
 
 - dh\
     Doubles the height of the input. Each line of the input is copied to every other line of the output and the missing lines are interpolated.\
