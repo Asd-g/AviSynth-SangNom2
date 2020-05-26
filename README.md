@@ -13,7 +13,7 @@ SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool
 ## Parameters:
 
 - clip\
-    A clip to process. It must be Y/YUV 8..32-bit format.
+    A clip to process. It must be Y/YUV(A) 8..32-bit format.
     
 - order\
     0: Double frame rate, top and bottom fields are kept but DoubleWeave must be called before SangNom2.\
@@ -42,7 +42,29 @@ SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool
 - luma, chroma\
     Planes to process.\
     Default: luma=true; chroma = true.
+
+
+```
+SangNom(clip, int "order", int "aa")
+```
+
+## Parameters:
+
+- clip\
+    A clip to process. It must be Y/YUV(A) 8..32-bit format.
     
+- order\
+    0: Single frame rate, keep bottom field.\    
+    1: Single frame rate, keep top field.\
+    2: Double frame rate, top and bottom fields are kept but DoubleWeave must be called before SangNom2.\
+    
+    Default: 1.
+    
+- aa\
+    The strength of luma anti-aliasing, this value is considered in 8 bit clip.\
+    Must be between 0 and 128.\
+    Default: 48.
+
 # Lincese
 
 This project is licensed under the MIT license. Binaries are GPL v2.
