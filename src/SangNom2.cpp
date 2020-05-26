@@ -1622,21 +1622,6 @@ SangNom2::SangNom2(PClip _child, int order, int aa, int aac, int threads, bool d
     try { env->CheckVersion(8); }
     catch (const AvisynthError&) { has_at_least_v8 = false; }
 
-    if (vi.IsRGB())
-        env->ThrowError("SangNom2: clip must be in Y/YUV format.");
-
-    if (vi.height % 2 != 0)
-        env->ThrowError("SangNom2: height must be even.");
-
-    if (_order < 0 || _order > 2)
-        env->ThrowError("SangNom2: order must be between 0..2.");
-
-    if (_aa < 0 || _aa > 128)
-        env->ThrowError("SangNom2: aa must be between 0..128.");
-
-    if (_aac < 0 || _aac > 128)
-        env->ThrowError("SangNom2: aac must be between 0..128.");
-
     int planecount = min(vi.NumComponents(), 3);
     for (int i = 0; i < planecount; i++)
     {
@@ -1853,16 +1838,70 @@ PVideoFrame SangNom2::GetFrame(int n, IScriptEnvironment* env)
 
 AVSValue __cdecl Create_SangNom2(AVSValue args, void* user_data, IScriptEnvironment* env)
 {
+    const VideoInfo& vi = args[0].AsClip()->GetVideoInfo();
+
+    const int _order = args[1].AsInt(1);
+    const int _aa = args[2].AsInt(48);
+    const int _aac = args[3].AsInt(0);
+
+    if (vi.IsRGB())
+        env->ThrowError("SangNom2: clip must be in Y/YUV format.");
+
+    if (vi.height % 2 != 0)
+        env->ThrowError("SangNom2: height must be even.");
+
+    if (_order < 0 || _order > 2)
+        env->ThrowError("SangNom2: order must be between 0..2.");
+
+    if (_aa < 0 || _aa > 128)
+        env->ThrowError("SangNom2: aa must be between 0..128.");
+
+    if (_aac < 0 || _aac > 128)
+        env->ThrowError("SangNom2: aac must be between 0..128.");
+
     return new SangNom2(
         args[0].AsClip(),
-        args[1].AsInt(1),
-        args[2].AsInt(48),
-        args[3].AsInt(0),
+        _order,
+        _aa,
+        _aac,
         args[4].AsInt(0),
         args[5].AsBool(false),
         args[6].AsBool(true),
-        args[7].AsBool(true),   
+        args[7].AsBool(true),
         env);
+}
+
+AVSValue __cdecl Create_SangNom(AVSValue args, void* user_data, IScriptEnvironment* env)
+{
+    const VideoInfo& vi = args[0].AsClip()->GetVideoInfo();
+
+    const int _order = args[1].AsInt(1);
+    static const char ord[3] = { 2,1,0 };
+    const int _aa = args[2].AsInt(48);
+    const int _aac = args[3].AsInt(0);
+
+        if (vi.IsRGB())
+            env->ThrowError("SangNom: clip must be in Y/YUV format.");
+
+        if (vi.height % 2 != 0)
+            env->ThrowError("SangNom: height must be even.");
+
+        if (_order < 0 || _order > 2)
+            env->ThrowError("SangNom: order must be between 0..2.");
+
+        if (_aa < 0 || _aa > 128)
+            env->ThrowError("SangNom: aa must be between 0..128.");
+
+        return new SangNom2(
+            args[0].AsClip(),
+            _order != 1 ? ord[_order] : 1,
+            _aa,
+            _aac,
+            args[4].AsInt(0),
+            args[5].AsBool(false),
+            args[6].AsBool(true),
+            args[7].AsBool(true),
+            env);
 }
 
 const AVS_Linkage* AVS_linkage;
@@ -1873,5 +1912,6 @@ const char* __stdcall AvisynthPluginInit3(IScriptEnvironment * env, const AVS_Li
     AVS_linkage = vectors;
 
     env->AddFunction("SangNom2", "c[order]i[aa]i[aac]i[threads]i[dh]b[luma]b[chroma]b", Create_SangNom2, 0);
+    env->AddFunction("SangNom", "c[order]i[aa]i", Create_SangNom, 0);
     return "SangNom2";
 }
