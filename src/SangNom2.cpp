@@ -1673,14 +1673,14 @@ PVideoFrame SangNom2::GetFrame(int n, IScriptEnvironment* env)
 
     if (_order == SNOT_DFR)
     {
-        if (vi.IsBFF()) // bottom field first
-            offset = 1;
-        else // top field first
-            offset = 0;
+        if (child->GetParity(n))
+            offset = 0; // top field first
+        else
+            offset = 1; // bottom field first
     }
     else if (_order == SNOT_SFR_KT)
         offset = 0;
-    else if (_order == SNOT_SFR_KB)
+    else
         offset = 1;
 
     //auto dst = vsapi->copyFrame(src, core);
