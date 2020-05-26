@@ -43,6 +43,7 @@ SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool
     Planes to process.\
     Default: luma=true; chroma = true.
 
+# Usage
 
 ```
 SangNom(clip, int "order", int "aa")
@@ -54,10 +55,9 @@ SangNom(clip, int "order", int "aa")
     A clip to process. It must be Y/YUV(A) 8..32-bit format.
     
 - order\
-    0: Single frame rate, keep bottom field.\    
+    0: Single frame rate, keep bottom field.\
     1: Single frame rate, keep top field.\
     2: Double frame rate, top and bottom fields are kept but DoubleWeave must be called before SangNom2.\
-    
     Default: 1.
     
 - aa\
