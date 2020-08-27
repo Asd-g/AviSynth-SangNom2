@@ -13,7 +13,7 @@ SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool
 ## Parameters:
 
 - clip\
-    A clip to process. It must be Y/YUV(A) 8..32-bit format.
+    A clip to process. It must be Y/YUV(A) 8..32-bit planar format.
     
 - order\
     0: Double frame rate, top and bottom fields are kept but DoubleWeave must be called before SangNom2.\
@@ -59,7 +59,7 @@ SangNom(clip, int "order", int "aa", int "opt")
 ## Parameters:
 
 - clip\
-    A clip to process. It must be Y/YUV(A) 8..32-bit format.
+    A clip to process. It must be Y/YUV(A) 8..32-bit planar format.
     
 - order\
     0: Single frame rate, keep bottom field.\
