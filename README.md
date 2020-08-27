@@ -7,7 +7,7 @@ This is [a port of the VapourSynth plugin SangNom2](https://github.com/dubhater/
 # Usage
 
 ```
-SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool "luma", bool "chroma")
+SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool "luma", bool "chroma", int "opt")
 ```
 
 ## Parameters:
@@ -42,11 +42,18 @@ SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool
 - luma, chroma\
     Planes to process.\
     Default: luma=true; chroma = true.
+    
+- opt\
+    Sets which cpu optimizations to use.\
+    -1: Auto-detect.\
+    0: Use C++ code.\
+    1: Use SSE2 code.\
+    Default: -1.
 
 # Usage
 
 ```
-SangNom(clip, int "order", int "aa")
+SangNom(clip, int "order", int "aa", int "opt")
 ```
 
 ## Parameters:
@@ -64,6 +71,13 @@ SangNom(clip, int "order", int "aa")
     The strength of luma anti-aliasing, this value is considered in 8 bit clip.\
     Must be between 0 and 128.\
     Default: 48.
+    
+- opt\
+    Sets which cpu optimizations to use.\
+    -1: Auto-detect.\
+    0: Use C++ code.\
+    1: Use SSE2 code.\
+    Default: -1.
 
 # Lincese
 
