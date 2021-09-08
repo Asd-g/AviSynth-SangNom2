@@ -1,16 +1,22 @@
-# Description
+## Description
 
 SangNom is a single field deinterlacer using edge-directed interpolation but nowadays it's mainly used in anti-aliasing scripts.
 
 This is [a port of the VapourSynth plugin SangNom2](https://github.com/dubhater/vapoursynth-sangnom).
 
-# Usage
+### Requirements:
+
+- AviSynth 2.60 / AviSynth+ 3.4 or later
+
+- Microsoft VisualC++ Redistributable Package 2022 (can be downloaded from [here](https://github.com/abbodi1406/vcredist/releases))
+
+### Usage:
 
 ```
 SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool "luma", bool "chroma", int "opt")
 ```
 
-## Parameters:
+### Parameters:
 
 - clip\
     A clip to process. It must be Y/YUV(A) 8..32-bit planar format.
@@ -50,13 +56,13 @@ SangNom2(clip, int "order", int "aa", int "aac", int "threads", bool "dh" , bool
     1: Use SSE2 code.\
     Default: -1.
 
-# Usage
+### Usage:
 
 ```
 SangNom(clip, int "order", int "aa", int "opt")
 ```
 
-## Parameters:
+### Parameters:
 
 - clip\
     A clip to process. It must be Y/YUV(A) 8..32-bit planar format.
@@ -79,6 +85,6 @@ SangNom(clip, int "order", int "aa", int "opt")
     1: Use SSE2 code.\
     Default: -1.
 
-# Lincese
+### Lincese:
 
 This project is licensed under the MIT license. Binaries are GPL v2.
