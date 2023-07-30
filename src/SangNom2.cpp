@@ -408,6 +408,8 @@ AVSValue __cdecl Create_SangNom2(AVSValue args, void* user_data, IScriptEnvironm
         env->ThrowError("SangNom2: clip must be in Y/YUV planar format.");
     if (vi.height % 2 != 0)
         env->ThrowError("SangNom2: height must be even.");
+    if (vi.Is420() && vi.height % 4)
+        env->ThrowError("SangNom2: height must be mod4.");
     if (_order < 0 || _order > 2)
         env->ThrowError("SangNom2: order must be between 0..2.");
     if (_aa < 0 || _aa > 128)
@@ -445,6 +447,8 @@ AVSValue __cdecl Create_SangNom(AVSValue args, void* user_data, IScriptEnvironme
         env->ThrowError("SangNom: clip must be in Y/YUV planar format.");
     if (vi.height % 2 != 0)
         env->ThrowError("SangNom: height must be even.");
+    if (vi.Is420() && vi.height % 4)
+        env->ThrowError("SangNom: height must be mod4.");
     if (_order < 0 || _order > 2)
         env->ThrowError("SangNom: order must be between 0..2.");
     if (_aa < 0 || _aa > 128)
