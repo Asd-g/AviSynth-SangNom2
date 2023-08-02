@@ -1,3 +1,6 @@
+##### 0.6.1:
+    Throw error if YUV420 height is not mod4.
+
 ##### 0.6.0:
     Added parameter opt.
     Applied the changes from VS SangNom r42.
